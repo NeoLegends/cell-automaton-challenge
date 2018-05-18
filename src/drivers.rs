@@ -232,5 +232,18 @@ mod tests {
         assert_eq!(gol.get_cell(0, 2), BinaryCell::Dead);
         assert_eq!(gol.get_cell(1, 2), BinaryCell::Live);
         assert_eq!(gol.get_cell(2, 2), BinaryCell::Dead);
+
+        let mut gol2: Driver<GameOfLife> = Driver::new(2, 2);
+        gol2.set_cell(0, 0, BinaryCell::Live);
+        gol2.set_cell(0, 1, BinaryCell::Live);
+        gol2.set_cell(1, 0, BinaryCell::Live);
+        gol2.set_cell(1, 1, BinaryCell::Live);
+
+        gol.step_many(100); // Step lots of times
+
+        assert_eq!(gol2.get_cell(0, 0), BinaryCell::Live);
+        assert_eq!(gol2.get_cell(0, 1), BinaryCell::Live);
+        assert_eq!(gol2.get_cell(1, 0), BinaryCell::Live);
+        assert_eq!(gol2.get_cell(1, 1), BinaryCell::Live);
     }
 }
