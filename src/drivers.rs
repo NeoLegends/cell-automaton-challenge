@@ -3,7 +3,7 @@ use std::fmt::{self, Display, Formatter};
 #[cfg(feature = "parallel")]
 use rayon::prelude::*;
 
-use rulesets::{CellWorld, RuleSet};
+use ::{CellWorld, RuleSet};
 
 /// Gibt potentielle eine Adjazenz zum Rand der Matrix an.
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
