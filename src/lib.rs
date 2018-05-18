@@ -6,7 +6,7 @@ pub mod rulesets;
 
 pub trait RuleSet {
     /// Der diesem RuleSet zugrunde liegende Zellentyp
-    type Cell : Default + Copy + PartialEq;
+    type Cell: Default + Copy + PartialEq;
 
     /// Die Regel, die angibt, wie sich die Zellen in diesem RuleSet verhalten.
     /// Das übergebene Array gibt den Zustand einer Zelle und ihrer acht Moore-Nachbarn
