@@ -7,7 +7,7 @@ use ::{CellWorld, RuleSet};
 
 /// Gibt potentielle eine Adjazenz zum Rand der Matrix an.
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
-pub enum Adjacency {
+pub enum Adjacency { // Bitflags vllt. besser hier?
     Top,
     Right,
     Bottom,
