@@ -1,0 +1,11 @@
+[package]
+authors = ["Moritz Gunz <moritz.gunz@gmail.com>"]
+name = "cellular-automaton"
+version = "0.1.0"
+
+[dependencies]
+rayon = { version = "1.0.1", optional = true }
+
+[features]
+default = ["parallel"]
+parallel = ["rayon"]
