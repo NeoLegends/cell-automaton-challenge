@@ -221,29 +221,31 @@ mod tests {
         gol.set_cell(1, 1, BinaryCell::Live);
         gol.set_cell(1, 2, BinaryCell::Live);
 
-        gol.step();
+        for _ in 0..10 {
+            gol.step();
 
-        assert_eq!(gol.get_cell(0, 0), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(1, 0), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(2, 0), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(0, 1), BinaryCell::Live);
-        assert_eq!(gol.get_cell(1, 1), BinaryCell::Live);
-        assert_eq!(gol.get_cell(2, 1), BinaryCell::Live);
-        assert_eq!(gol.get_cell(0, 2), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(1, 2), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(2, 2), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(0, 0), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(1, 0), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(2, 0), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(0, 1), BinaryCell::Live);
+            assert_eq!(gol.get_cell(1, 1), BinaryCell::Live);
+            assert_eq!(gol.get_cell(2, 1), BinaryCell::Live);
+            assert_eq!(gol.get_cell(0, 2), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(1, 2), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(2, 2), BinaryCell::Dead);
 
-        gol.step();
+            gol.step();
 
-        assert_eq!(gol.get_cell(0, 0), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(1, 0), BinaryCell::Live);
-        assert_eq!(gol.get_cell(2, 0), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(0, 1), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(1, 1), BinaryCell::Live);
-        assert_eq!(gol.get_cell(2, 1), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(0, 2), BinaryCell::Dead);
-        assert_eq!(gol.get_cell(1, 2), BinaryCell::Live);
-        assert_eq!(gol.get_cell(2, 2), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(0, 0), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(1, 0), BinaryCell::Live);
+            assert_eq!(gol.get_cell(2, 0), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(0, 1), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(1, 1), BinaryCell::Live);
+            assert_eq!(gol.get_cell(2, 1), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(0, 2), BinaryCell::Dead);
+            assert_eq!(gol.get_cell(1, 2), BinaryCell::Live);
+            assert_eq!(gol.get_cell(2, 2), BinaryCell::Dead);
+        }
 
         let mut gol2: Driver<GameOfLife> = Driver::new(2, 2);
         gol2.set_cell(0, 0, BinaryCell::Live);
