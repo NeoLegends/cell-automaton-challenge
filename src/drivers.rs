@@ -221,7 +221,7 @@ mod tests {
         gol.set_cell(1, 1, BinaryCell::Live);
         gol.set_cell(1, 2, BinaryCell::Live);
 
-        for _ in 0..10 {
+        for _ in 0..10 { // Test pulsating behavior
             gol.step();
 
             assert_eq!(gol.get_cell(0, 0), BinaryCell::Dead);
