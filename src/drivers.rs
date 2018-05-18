@@ -28,6 +28,14 @@ pub struct Driver<R: RuleSet> {
 }
 
 impl<R: RuleSet> Driver<R> {
+    /// Erstelle neuen Driver mit geg. Breite und Höhe.
+    fn new_with(width: usize, height: usize) -> Self {
+        Self {
+            data: (0..(width * height)).map(|_| Default::default()).collect(),
+            width,
+        }
+    }
+
     /// Berechnet, ob die Zelle am gegebenen Index adjazent zu einem der Ränder ist.
     fn adjacency(&self, idx: usize) -> Adjacency {
         let x = idx % self.width;
@@ -58,6 +66,11 @@ impl<R: RuleSet> Driver<R> {
                 Adjacency::None
             }
         }
+    }
+
+    /// Rufe Wert einer Zelle ab.
+    fn get(&self, x: usize, y: usize) -> R::Cell {
+        self.data[y * self.width + x]
     }
 
     /// Holt die 3x3-Matrix um die Zelle mit geg. Index.
@@ -103,6 +116,11 @@ impl<R: RuleSet> Driver<R> {
             [bl, b, br],
         ]
     }
+
+    /// Setze Wert einer Zelle.
+    fn set(&mut self, x: usize, y: usize, value: R::Cell) {
+        self.data[y * self.width + x] = value;
+    }
 }
 
 #[cfg(not(feature = "parallel"))]
@@ -110,22 +128,19 @@ impl<R: RuleSet> CellWorld<R> for Driver<R> {
     /// Leg ein neues Gitter mit der angegebenen Höhe und Breite an.
     /// Alle Zellen werden mit Default::default() initialisiert.
     fn new(width: usize, height: usize) -> Self {
-        Self {
-            data: (0..(width * height)).map(|_| Default::default()).collect(),
-            width,
-        }
+        Self::new_with(width, height)
     }
 
     /// Setz den Wert der Zelle an der angegebenen Position auf `value`
     /// Bei Koordinaten außerhalb des Gitters: beliebiges, safes Verhalten (z.b. panic, no-op)
     fn set_cell(&mut self, x: usize, y: usize, value: R::Cell) {
-        self.data[y * self.width + x] = value;
+        self.set(x, y, value)
     }
 
     /// Gib der Wert der Zelle an der angegebenen Position aus.
     /// Bei Koordinaten außerhalb des Gitters: beliebiges, safes Verhalten (z.b. panic, beliebiger return value)
     fn get_cell(&self, x: usize, y: usize) -> R::Cell {
-        self.data[y * self.width + x]
+        self.get(x, y)
     }
 
     /// Wende das Ruleset einmal auf das ganze Gitter an.
@@ -142,22 +157,19 @@ impl<R: RuleSet> CellWorld<R> for Driver<R>
     /// Leg ein neues Gitter mit der angegebenen Höhe und Breite an.
     /// Alle Zellen werden mit Default::default() initialisiert.
     fn new(width: usize, height: usize) -> Self {
-        Self {
-            data: (0..(width * height)).map(|_| Default::default()).collect(),
-            width,
-        }
+        Self::new_with(width, height)
     }
 
     /// Setz den Wert der Zelle an der angegebenen Position auf `value`
     /// Bei Koordinaten außerhalb des Gitters: beliebiges, safes Verhalten (z.b. panic, no-op)
     fn set_cell(&mut self, x: usize, y: usize, value: R::Cell) {
-        self.data[y * self.width + x] = value;
+        self.set(x, y, value)
     }
 
     /// Gib der Wert der Zelle an der angegebenen Position aus.
     /// Bei Koordinaten außerhalb des Gitters: beliebiges, safes Verhalten (z.b. panic, beliebiger return value)
     fn get_cell(&self, x: usize, y: usize) -> R::Cell {
-        self.data[y * self.width + x]
+        self.get(x, y)
     }
 
     /// Wende das Ruleset einmal auf das ganze Gitter an.
