@@ -21,7 +21,7 @@ pub enum Adjacency { // Bitflags vllt. besser hier?
 }
 
 /// Eine Gitter-Engine, welche Werte am Rand mit Default::default() emuliert.
-#[derive(Debug)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Driver<R: RuleSet> {
     data: Vec<R::Cell>,
     width: usize,
